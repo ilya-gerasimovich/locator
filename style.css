@@ -1,0 +1,182 @@
+body{
+	margin: 0;
+	width:100%;
+	height: 100%;
+	overflow:  hidden;
+}
+
+header {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	height: 70px;
+	background: darkgray;
+}
+
+.left {
+	position: absolute;
+	top:70px;
+	left: 0;
+	bottom: 70px;
+	background: deepskyblue;
+	right: 85%;
+}
+
+main {
+	position: absolute;
+	top:70px;
+	right: 10%;
+	background: white;
+	bottom: 70px;
+	left: 15%;
+}
+
+.right {
+	position: absolute;
+	right: 0;
+	top: 70px;
+	bottom: 70px;
+	left: 90%;
+	background: deepskyblue;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	height: 70px;
+	background: darkgray;
+}
+
+overlay {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	background: rgba(0,0,0,.8);
+	z-index: 2;
+}
+
+.form {
+	background: black;
+	width: 300px;
+	height: 200px;
+	position: absolute;
+	bottom: 50%;
+	left: 50%;
+	margin-left: -150px;
+	margin-bottom: -100px;
+	border-radius: 10px;
+	box-shadow: 0 0 7px rgba(255,255,255,1);
+	-moz-box-shadow: 0 0 7px rgba(255,255,255,.7);
+	-o-box-shadow: 0 0 7px rgba(255,255,255,.7);
+	-webkit-box-shadow: 0 0 7px rgba(255,255,255,.7);
+}
+
+.center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -85px;
+	margin-top: -35px;  
+}
+
+.btn {
+	width: 172px;
+	margin-top: 7px;
+}
+
+.openMenu {
+	display: none;
+	position: absolute;
+	left: 0;
+}
+
+.txt {
+	border-radius: 5px;
+	margin-top: 3px; 
+}
+
+.hello {
+	position: absolute;
+	right:0;
+}
+
+.logout {
+	position: absolute;
+	top: 20px;
+	right:0;
+	display: none;
+}
+
+@media screen and (max-width: 480px) {
+	.left {
+		display: none;
+	}
+
+	.right {
+		display: none;
+	}
+
+	header {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	height: 50px;
+	z-index: 2;
+	}
+
+	footer {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	height: 50px;
+	z-index: 2;
+	}
+
+	.leftHide {
+	top:50px;
+	right: 0;
+	background: deepskyblue;
+	height: 250px;
+	left: 0;
+	z-index: 1;
+	display: block;
+	}
+
+	main {
+	top:50px;
+	right: 0;
+	background: white;
+	height: 500px;
+	left: 0;
+	}
+
+	.rightHide {
+	top:300px;
+	right: 0;
+	background: deepskyblue;
+	height: 250px;
+	left: 0;
+	z-index: 1;
+	display: block;
+	}
+
+	overlay {
+	position: fixed;
+	height: 100%;
+	right: 0;
+	left: 0;
+	background: rgba(0,0,0,.8);
+	z-index: 3;
+	}
+
+	.openMenu {
+	display: block;
+	}
+}
