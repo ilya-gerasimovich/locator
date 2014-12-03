@@ -13,6 +13,7 @@ window.onload = function(){
 		var login = loginInput.value;
 		var pass = passInput.value;
 		var session = wialon.core.Session.getInstance();
+		
 		session.initSession('https://trc-api.wialon.com');
 		if(login != "" && pass != "")
 		{
@@ -21,35 +22,49 @@ window.onload = function(){
 				{
 					overlay.style.display = "none";
 					var name = session.getCurrUser().getName();
-					welcome.innerHTML = 'Привет, '+name;
+					welcome.innerHTML = 'Hello, '+name;
 					logoutInput.style.display = "block";
 					session.loadLibrary('itemIcon');
 					session.updateDataFlags([{type: 'type', data: 'avl_unit', flags: 0x00000411, mode: 0}],function(){
 						var items = session.getItems("avl_unit");
 						for(var i = 0; i < items.length; i++)
 						{	
+						
 							if(items[i].getPosition() != null)
 							{
-								container += "<div>"+"<img src="+
-								items[i].getIconUrl(32)+">"+items[i].getName()+" "+"<br> X: "+items[i].getPosition().x+
-								"<br> Y: "+items[i].getPosition().y+"</div>";
+								var date = new Date();
+								date.setTime(items[i].getPosition().t*1000);
+								container += "<div class='cont'>"+"<img src="+
+								items[i].getIconUrl(64)+
+								">"+"<span class='spanName'> Name: "+
+								items[i].getName()+"</span>"+
+								"<br> Speed: "+items[i].getPosition().s+" km/h"+
+								"<br> Last date: "+date+
+								"<br> <span class='spanPos'>X: "+
+								items[i].getPosition().x+
+								"<br> Y: "+items[i].getPosition().y+
+								"</span></div>";
 							}
 							else
-								container += "<div>"+"<img src="+
-								items[i].getIconUrl()+">"+items[i].getName()+"<br>Неизвестная позиция"+"</div>";
+								container += "<div class='cont'>"+"<img src="+
+								items[i].getIconUrl()+">"+
+								"<span class='spanName'>Name: "+items[i].getName()+
+								"</span><br> Last position: unknown"+
+								"</div>";
 						}
 					sideBarLeft.innerHTML = container;
+					container = "";
 					});
 				}
 				else
 				{
 					passInput.value = "";
-					alert("Invalid");
+					alert("Invalid login or password");
 				}
 			});
 		}
 		else
-			alert("empty");
+			alert("Empty");
 	}
 
 	logOut.onclick = function() {
