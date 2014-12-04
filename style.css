@@ -2,18 +2,20 @@ body{
 	margin: 0;
 	width:100%;
 	height: 100%;
-	overflow:  hidden;
+	overflow: hidden;
 }
 
 .cont {
 	margin: 2px;
-	background: lightgray;
+	/*background: lightgray;*/
+	background: linear-gradient(to bottom, white,lightgray);
 	padding: 2px;
 	cursor: pointer;
 }
 
 .cont:hover {
 	box-shadow: 0 0 5px rgba(0,0,0,1);
+	background: linear-gradient(to bottom,white,darkgray);
 }
 
 header {
@@ -21,9 +23,10 @@ header {
 	top: 0;
 	right: 0;
 	left: 0;
-	height: 70px;
-	background: darkgray;
+	height: 65px;
+	background: #414141;
 	padding: 3px;
+	z-index: 1;
 }
 
 .left {
@@ -31,7 +34,7 @@ header {
 	top:70px;
 	left: 0;
 	bottom: 70px;
-	background: deepskyblue;
+	background: darkgray;
 	right: 85%;
 	overflow: auto;
 }
@@ -43,6 +46,7 @@ main {
 	background: white;
 	bottom: 70px;
 	left: 15%;
+	box-shadow: 0 0 10px rgba(0,0,0,.5);
 }
 
 .right {
@@ -51,7 +55,7 @@ main {
 	top: 70px;
 	bottom: 70px;
 	left: 90%;
-	background: deepskyblue;
+	background: lightgray;
 }
 
 footer {
@@ -60,7 +64,7 @@ footer {
 	right: 0;
 	left: 0;
 	height: 70px;
-	background: darkgray;
+	background: #414141;
 }
 
 overlay {
@@ -69,12 +73,12 @@ overlay {
 	bottom: 0;
 	right: 0;
 	left: 0;
-	background: rgba(0,0,0,.8);
+	background: rgba(41,41,41,.8);
 	z-index: 10000;
 }
 
 .form {
-	background: black;
+	background: #000;
 	width: 300px;
 	height: 200px;
 	position: absolute;
@@ -124,25 +128,30 @@ overlay {
 
 .hello {
 	position: absolute;
-	right:3px;
+	right:10px;
+	top: 7px;
 	font-family: Verdana;
 	font-weight: bold;
+	color: white;
 }
 
 .logout {
 	position: absolute;
-	bottom: 10px;
-	right: 3px;
-	background: white;
-	width: 60px;
+	bottom: 15px;
+	right: 5px;
+	background: linear-gradient(to bottom,lightgray,white);
+	width: 100px;
 	cursor: pointer;
 	font-family: Verdana;
 	font-weight: bold;
+	text-align: center;
+	height: 20px;
 	display: none;
 }
 
 .logout:hover {
-	box-shadow: 0 0 7px rgba(0,0,0,.5);
+	box-shadow: 0 0 7px rgba(255,255,255,1);
+
 }
 
 .spanName {
@@ -160,6 +169,40 @@ overlay {
 	height: 100%;
 }
 
+.logo {
+	width:160px;
+	display: inline-block;
+}
+
+.message {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	color: white;
+}
+
+.phone {
+	width: 20px;
+	height: 20px;
+	margin: 3px;
+}
+
+.numb {
+	position: absolute;
+	top: 22px;
+}
+
+.osm {
+	position: absolute;
+	bottom: 20px;
+	right: 10px;
+	color: white;
+}
+
+a {
+	color: deepskyblue;
+}
+
 @media screen and (max-width: 480px) {
 	.hello {
 	font-size: 12px;
@@ -168,7 +211,7 @@ overlay {
 	.logout {
 	bottom: 3px;
 	font-size:12px;
-	width: 30px;
+	width: 70px;
 	}
 	
 	.left {
@@ -185,7 +228,7 @@ overlay {
 	right: 0;
 	left: 0;
 	height: 50px;
-	z-index: 2;
+	z-index: 10002;
 	}
 
 	footer {
@@ -194,16 +237,16 @@ overlay {
 	right: 0;
 	left: 0;
 	height: 50px;
-	z-index: 2;
+	z-index: 10002;
 	}
 
 	.leftHide {
 	top:55px;
 	right: 0;
-	background: deepskyblue;
+	background: darkgray;
 	height: 250px;
 	left: 0;
-	z-index: 1;
+	z-index: 10000;
 	display: block;
 	}
 
@@ -218,10 +261,10 @@ overlay {
 	.rightHide {
 	top:305px;
 	right: 0;
-	background: deepskyblue;
+	background: lightgray;
 	height: 250px;
 	left: 0;
-	z-index: 1;
+	z-index: 10000;
 	display: block;
 	}
 
@@ -231,10 +274,30 @@ overlay {
 	right: 0;
 	left: 0;
 	background: rgba(0,0,0,.8);
-	z-index: 3;
+	z-index: 100003;
 	}
 
 	.openMenu {
 	display: block;
+	}
+
+	.logo {
+	width:160px;
+	display: inline-block;
+	position: absolute;
+	left: 45px;
+	top: 0;
+	}
+
+	.message {
+	top: 2px;
+	}
+
+	.osm {
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
+	width: 100px;
+	font-size: 12px;
 	}
 }
