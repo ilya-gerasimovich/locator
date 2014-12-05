@@ -10,6 +10,7 @@ window.onload = function(){
 	var sideBarRight = document.getElementById("sideRight");
 	var sessionWia = wialon.core.Session.getInstance();
 	var map = initMap();
+	var MARKERS = {};
 
 	LogIn.onclick = function(){
 		var login = loginInput.value;
@@ -34,9 +35,15 @@ window.onload = function(){
 					{	
 						if(items[i].getPosition() != null)
 						{
-							container += addItems(items[i]);
 							var myIcon = addIcon(items[i]);
 							var marker = L.marker([items[i].getPosition().y, items[i].getPosition().x],{icon: myIcon}).addTo(map);
+							MARKERS[i] = marker;
+							items[i].addListener("changePosition", function(e) {
+								var mark = e.getTarget();
+								MARKERS[i].setLatLng(L.latLng(mark.getPosition().y,mark.getPosition().x));
+								console.log(MARKERS[i].getPosition().x);
+							});
+							container += addItems(items[i]);
 							array[i] = L.latLng(items[i].getPosition().y, items[i].getPosition().x);
 							marker.bindPopup(popUp(items[i])).openPopup();
 						}
@@ -52,11 +59,27 @@ window.onload = function(){
 				sideBarLeft.innerHTML = container;
 				container = "";
 				});
+				session.addListener("serverUpdated",function(){
+					var time = session.getServerTime();
+					var items = session.getItems("avl_unit");
+					
+					for(var i = 0; i < items.length; i++)
+					{
+						var dateTime = document.getElementById("unit_"+items[i].getId());
+						if(items[i].getPosition() != null)
+						{
+							var dateUnit = items[i].getLastMessage().t;
+							dateTime.innerHTML = time-dateUnit + " second ago";
+						}
+					}
+				 	
+				});
 			}
 			else
 			{
 				passInput.value = "";
 				alert("Invalid login or password");
+
 			}
 			});
 		}
@@ -70,18 +93,19 @@ window.onload = function(){
 		session.logout(function(code){
 			if(code == 0)
 			{
+				map.remove();
 				welcome.innerHTML = '';
 				overlay.style.display = "block";
 				passInput.value = "";
 				logoutInput.style.display = "none";
 				sideBarLeft.innerHTML = "";
+				map = initMap();
 			}
 		});
 	}
 
 	menuOpen.onclick = function() {
 		sideBarLeft.classList.toggle('leftHide');
-		sideBarRight.classList.toggle('rightHide');
 	}
 
 	sideBarLeft.onclick = function(event) {
@@ -93,6 +117,16 @@ window.onload = function(){
 			var item = sessionWia.getItem(id[1]);
 			map.setView(new L.LatLng(item.getPosition().y,item.getPosition().x),18);
 		}
+		else{
+			/*target = target.parentNode();
+			if(target.hasAttribute("unit"))
+			{
+				var id = target.getAttribute("unit");
+				id = id.split("_");
+				var item = sessionWia.getItem(id[1]);
+				map.setView(new L.LatLng(item.getPosition().y,item.getPosition().x),18);
+			}*/
+		}
 	}
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -100,9 +134,9 @@ function initMap() {
 	var map = L.map('map').setView([51.505, -0.09], 13);
 	var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 	var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
-	var osm = new L.TileLayer(osmUrl);//, {attribution: osmAttrib});
+	var osm = new L.TileLayer(osmUrl);
 	map.addLayer(osm);
-	map.setView(new L.LatLng(51.3, 0.7),9);
+	map.setView(new L.LatLng(53.9, 27.55),12);
 	return map;
 }
 
@@ -113,7 +147,8 @@ function addItems(item) {
 	">"+"<span class='spanName'> "+
 	item.getName()+"</span>"+
 	"<br> Speed: "+item.getPosition().s+" km/h"+
-	"<br> Last date: "+date+
+	"<br> <span>Last date: "+ date +"</span>"+
+	"<br> <span id='unit_"+item.getId()+"'></span>"+
 	"<br> <span class='spanPos'>X: "+
 	item.getPosition().x+
 	"<br> Y: "+item.getPosition().y+
@@ -143,4 +178,9 @@ function addIcon(item) {
 	    popupAnchor: [32, 16]
 	});
 	return myIcon;
+}
+
+function getDateUnit(item) {
+	var date = item.getLastMessage().t;
+	return date;
 }

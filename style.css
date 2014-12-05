@@ -42,7 +42,7 @@ header {
 main {
 	position: absolute;
 	top:70px;
-	right: 10%;
+	right: 0;
 	background: white;
 	bottom: 70px;
 	left: 15%;
@@ -133,6 +133,7 @@ overlay {
 	font-family: Verdana;
 	font-weight: bold;
 	color: white;
+	font-size: 22px;
 }
 
 .logout {
@@ -205,12 +206,12 @@ a {
 
 @media screen and (max-width: 480px) {
 	.hello {
-	font-size: 12px;
+	font-size: 16px;
 	}
 	
 	.logout {
 	bottom: 3px;
-	font-size:12px;
+	font-size:15px;
 	width: 70px;
 	}
 	
@@ -244,7 +245,7 @@ a {
 	top:55px;
 	right: 0;
 	background: darkgray;
-	height: 250px;
+	height: 500px;
 	left: 0;
 	z-index: 10000;
 	display: block;
